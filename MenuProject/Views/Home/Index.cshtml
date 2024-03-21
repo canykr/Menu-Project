@@ -1,0 +1,36 @@
+﻿@model List<MenuProject.Models.Entities.Categories>
+@{
+    ViewData["Title"] = "AnaSayfa";
+}
+
+@foreach (var category in Model)
+{
+    <h5 class="card-header bg-primary text-white">@category.CategoryName (@category.Products.Count ürün)</h5>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th style="width: 150px;"> </th>
+                <th style="width: 300px;"> </th>
+                <th style="width: 100px;"></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var product in category.Products)
+            {
+                <tr>
+                    <td>
+                        <img src="@product.ImageUrl" alt="Ürün Görseli" style="width:100px; height:auto;" />
+                    </td>
+                    <td>
+                        <div>@product.ProductName</div>
+                        <div style="font-size : smaller;">@product.ProductDetails</div>
+                    </td>
+                    <td>@product.Price TL</td>
+                </tr>
+                
+                   
+               
+            }
+        </tbody>
+    </table>
+}

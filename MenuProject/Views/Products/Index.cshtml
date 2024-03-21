@@ -1,0 +1,47 @@
+﻿@model IEnumerable<MenuProject.Models.Entities.Products>
+
+@{
+    ViewData["Title"] = "Ürünler";
+}
+
+@if (Model.FirstOrDefault() != null)
+{
+    <h3>@Model.FirstOrDefault().CategoryName Ürün Yönetimi</h3>
+}
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Ürün Adı</th>
+            <th>Ürün Detayları</th>
+            <th>Fiyat</th>
+            <th>Görsel URL</th>
+            <th>Düzenle</th>
+            <th>Sil</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {       
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.ProductName)</td>
+                <td>@Html.DisplayFor(modelItem => item.ProductDetails)</td>
+                <td>@Html.DisplayFor(modelItem => item.Price)</td>
+                <td>@Html.DisplayFor(modelItem => item.ImageUrl)</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-outline-warning">Düzenle</a>
+                </td>
+             
+                <td>
+                    <form asp-action="Delete" asp-controller="Products" method="post">
+                        <input type="hidden" name="id" value="@item.Id" />
+                        <button type="submit" class="btn btn-danger">Sil</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<p>
+    <a asp-action="Create" class="btn btn-primary">Yeni Ürün Ekle</a>
+</p>

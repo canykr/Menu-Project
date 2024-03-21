@@ -1,0 +1,51 @@
+﻿@model List<MenuProject.Models.Entities.Categories>
+
+@{
+    ViewData["Title"] = "Editör";
+}
+<h4> Kategoriler</h4>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Kategori Adı</th>        
+            <th>Sil</th>
+            <th>Ürün Detayları</th>
+        </tr>
+    </thead>
+    <tbody>
+       
+        @foreach (var category in Model)
+        {
+           <tr>
+                <td>
+                    <form asp-action="Edit" method="post">
+                        <input type="hidden" name="id" value="@category.Id" />
+                        <input type="text" name="categoryName" value="@category.CategoryName" class="form-control" />
+                        <button type="submit" class="btn btn-outline-warning mt-2" formmethod="post">Güncelle</button>           
+                    </form>
+                </td>
+                <td>
+                    <form asp-action="Delete" method="post">
+                        <input type="hidden" name="id" value="@category.Id" />
+                        <button type="submit" class="btn btn-outline-danger">Sil</button>
+                    </form>
+                </td>
+                <td>
+                    <a asp-controller="Products" asp-action="Index" asp-route-categoryId="@category.Id" class="btn btn-secondary">Ürünleri Yönet</a>
+                </td>
+             </tr>
+        }
+    </tbody> 
+</table>
+
+<div class="card">
+    <div class="card-body">
+        <div class="card-title">Kategori Ekle</div>    
+<form asp-action="Create" method="post">
+    <input type="text" name="categoryName" class="form-control" />
+    <button type="submit" class="btn btn-primary mt-2">Ekle</button>
+</form>
+    </div>
+
+</div>
